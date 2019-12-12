@@ -1,12 +1,12 @@
 " Dr. G.Clavier wonderful vimrc file
 set encoding=utf-8
 
-" Les couleurs
+" My colorset
 colorscheme turlututu
 syntax on
 
-" Des options que j'aime bien
-" Wrap les lignes
+" Options I like
+" Wrap lines
 set wrap
 set showcmd
 set cursorline
@@ -15,22 +15,25 @@ set showmatch
 set incsearch
 set hlsearch
 
-" Active l'indentation
+" set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
+" set list
+
+" Indent
 filetype plugin indent on
 set foldmethod=indent
 set nofoldenable
 set ruler
-" Indentation sans putains de tabulations de merde
+" Indent without fucking tabs
 set tabstop=4
 set shiftwidth=4
 set expandtab
-" Affiche les numéros de lignes
+" Displya relative line number
 set number relativenumber
-" Commente automatiquement en dessous des commentaires
-" uniquement en insert mode
+" Starts line with new comments below comment line
+" Only in insert mode
 set formatoptions+=cr
 
-" J'ai piqué la statusline de quelqu'un
+" I stole this from someone
 set statusline=
 set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
 set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
@@ -54,14 +57,57 @@ set statusline+=\ %3l:%-2c\  " line + column
 set statusline+=%#Cursor#
 set statusline+=\ %3p%%\  " percentage
 
-" Va chercher mes templates pour différents formats
+" Smart remapping
+let mapleader = "\<Space>"
+
+" I finished Dark Souls 1, 2 and 3.
+" I play Vim the hardcore way
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <right> <nop>
+nnoremap <left> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <right> <nop>
+inoremap <left> <nop>
+inoremap <esc> <nop>
+
+" People suck but I still want to
+" be able to go out of Vim insert mode
+" at some points in order to eat and sleep.
+inoremap jk <esc>
+
+" Edit and load .vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Surround word by ' or " in normal mode
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+
+" Surround visually selected region by ' or " in visual mode
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
+vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+
+" Get my templates for usual formats
 autocmd bufnewfile *.f90 0r /home/gclavier/.vim/template.f90
 autocmd bufnewfile *.py  0r /home/gclavier/.vim/template.py
 autocmd bufnewfile *.tex 0r /home/gclavier/.vim/template.tex
 autocmd bufnewfile *.sh  0r /home/gclavier/.vim/template.sh
 autocmd bufnewfile *.ms  0r /home/gclavier/.vim/template.ms
 
-" Commandes utiles pour LaTeX
+" Useful comments commands for commenty comments
+autocmd filetype python  nnoremap <buffer> <leader>c ^i#<Space><esc>
+autocmd filetype tex     nnoremap <buffer> <leader>c ^i%<Space><esc>
+autocmd filetype fortran nnoremap <buffer> <leader>c ^i!<Space><esc>
+autocmd filetype vim     nnoremap <buffer> <leader>c ^i"<Space><esc>
+
+" Useful command for my pythonic python coding
+autocmd filetype python :iabbrev <buffer> iff if:<left>
+autocmd filetype python :iabbrev <buffer> eif elif:<left>
+autocmd filetype python :iabbrev <buffer> eff else:<cr>
+
+" Useful commands for my LaTeXiLaTeX
 autocmd FileType tex inoremap ;b \begin{}<Enter><Enter>\end{}<Up><Up><Right>
 autocmd FileType tex inoremap ;beq \begin{equation}<Enter><Enter>\end{equation}<Up><Up><Right>
 autocmd FileType tex inoremap ;bit \begin{itemize}<Enter>  \item<Enter>  \item<Enter>  \item<Enter>\end{itemize}<Esc>3k$
