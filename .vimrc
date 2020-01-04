@@ -1,70 +1,67 @@
 " Dr. G.Clavier wonderful vimrc file
-set encoding=utf-8
-
-" My colorset
-colorscheme turlututu
-syntax on
-
-" Options I like
-" Wrap lines
-set wrap
-set showcmd
-set cursorline
-set wildmenu
-set showmatch
-set incsearch
-set hlsearch
-
-" set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
-" set list
-
-" Indent
-filetype plugin indent on
-set foldmethod=indent
-set nofoldenable
-set ruler
-
-" Indent without fucking tabs
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-" Display relative line number
-set number relativenumber
-
-" Starts line with new comments below comment line
-" Only in insert mode
-set formatoptions+=cr
+" General options {{{
+    set encoding=utf-8
+    " My colorset
+    colorscheme turlututu
+    syntax on
+    " Options I like
+    " Wrap lines
+    set wrap
+    set showcmd
+    set cursorline
+    set wildmenu
+    set showmatch
+    set incsearch
+    set hlsearch
+    " Makes all character visible. A bit annoying but useful sometimes
+    " set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
+    " set list
+    " Indent
+    filetype plugin indent on
+    set ruler
+    " Indent without fucking tabs
+    set tabstop=4
+    set shiftwidth=4
+    set expandtab
+    " Display relative line number
+    set number relativenumber
+    " Starts line with new comments below comment line
+    " Only in insert mode
+    set formatoptions+=cr
+" }}}
 
 " I stole this from someone
 " Check :help statusline for fields meanings
 " You can define specific statusline using groups
 " and autocommands (see below)
-set statusline=
-set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
-set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-set statusline+=\ \%n\          " buffer number
-set statusline+=%#Visual#       " colour
-set statusline+=%{&paste?'\ PASTE\ ':''}
-set statusline+=%{&spell?'\ SPELL\ ':''}
-set statusline+=%#CursorIM#
-set statusline+=%F
-set statusline+=%M
-set statusline+=%#Cursor#
-set statusline+=%#CursorLine#
-set statusline+=\ %t\
-set statusline+=%= " Add to the right side
-set statusline+=%#CursorLine#
-set statusline+=\ %Y\
-set statusline+=%#CursorIM#
-set statusline+=\ %3l:%-2c\  " line + column
-set statusline+=%#Cursor#
-set statusline+=\ %3p%%\  " percentage
-
-" Display statusline always
-set laststatus=2
+" #STUFF# commands are bg colours
+" see :help statusline for other options
+" Statusline {{{
+    set statusline=
+    set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+    set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
+    set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
+    set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+    set statusline+=\ \%n\          " buffer number
+    set statusline+=%#Visual#
+    set statusline+=%{&paste?'\ PASTE\ ':''}
+    set statusline+=%{&spell?'\ SPELL\ ':''}
+    set statusline+=%#CursorIM#
+    set statusline+=%F " Full path to file
+    set statusline+=%M " Modified flag (+)
+    set statusline+=%#Cursor#
+    set statusline+=%#CursorLine#
+    set statusline+=\ %t\  " File name
+    set statusline+=%= " Add to the right side
+    set statusline+=%#CursorLine#
+    set statusline+=\ %Y\  " File type
+    set statusline+=%#CursorIM#
+    set statusline+=\ %3l:%-2c\  " line + column
+    set statusline+=%#Cursor#
+    set statusline+=\ %3p%%\  " percentage
+    " Display statusline always
+    set laststatus=2
+" }}}
 
 " Some notes on remapping:
 " 1) ALWAYS USE the *noremap variant. Else keys are interpreted as remapped.
@@ -100,45 +97,65 @@ set laststatus=2
 "    <pattern>. For example:
 "    'onoremap b /return<cr>' <- will operate on all the texte until it finds 'return'
 
-" Smart remapping starts here
-let mapleader = "\<Space>"
+" Remapping {{{
+    " Smart remapping starts here
+    let mapleader = "\<Space>"
+    " I finished Dark Souls 1, 2 AND 3.
+    " I play Vim the hardcore way
+    nnoremap <up> <nop>
+    nnoremap <down> <nop>
+    nnoremap <right> <nop>
+    nnoremap <left> <nop>
+    inoremap <up> <nop>
+    inoremap <down> <nop>
+    inoremap <right> <nop>
+    inoremap <left> <nop>
+    inoremap <esc> <nop>
+    vnoremap <up> <nop>
+    vnoremap <down> <nop>
+    vnoremap <right> <nop>
+    vnoremap <left> <nop>
+    vnoremap <esc> <nop>
+    " People suck but I still want to
+    " be able to go out of Vim's insert mode
+    " at some points in order to eat and sleep.
+    inoremap jk <esc>
+    vnoremap jk <esc>
+    " Edit and source .vimrc
+    nnoremap <leader>ev :split $MYVIMRC<cr>
+    nnoremap <leader>sv :source $MYVIMRC<cr>
+    " Surround word by ' or " in normal mode
+    nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+    nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+    " Surround visually selected region by ' or " in visual mode
+    vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
+    vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+    " Show trailing whitespaces
+    nnoremap <leader>w :match Error /\v +$/<cr>
+    nnoremap <leader>W :%s/\v +$//g<cr>
+    " Ensure search uses very magic mode
+    nnoremap / /\v
+    " THE LONG AWAITED STOP THIS GODDAMM HILIGHTSEARCH COMMAND
+    nnoremap <leader>/ :nohlsearch<cr>
+" }}}
 
-" I finished Dark Souls 1, 2 AND 3.
-" I play Vim the hardcore way
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <right> <nop>
-nnoremap <left> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <right> <nop>
-inoremap <left> <nop>
-inoremap <esc> <nop>
-vnoremap <up> <nop>
-vnoremap <down> <nop>
-vnoremap <right> <nop>
-vnoremap <left> <nop>
-vnoremap <esc> <nop>
-
-" People suck but I still want to
-" be able to go out of Vim's insert mode
-" at some points in order to eat and sleep.
-inoremap jk <esc>
-vnoremap jk <esc>
-
-" Edit and source .vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" Surround word by ' or " in normal mode
-nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
-nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
-
-" Surround visually selected region by ' or " in visual mode
-vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
-vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+" This sign and below group allows folding on markers for vim files.
+" This might become handy in order to navigate the vim
+" configuration files.
+" Vim config group {{{
+augroup filetype_vim
+    autocmd!
+    " Just a simple trick to comment my wonderful .vimrc
+    autocmd FileType vim     nnoremap <buffer> <leader>c ^i"<Space><esc>
+    " Sets fold method to markers
+    autocmd FileType vim     setlocal foldmethod=marker
+    " Folds vimfiles when opened
+    autocmd FileType vim     set foldlevelstart=0
+augroup END
+" }}}
 
 " Get my templates for usual formats
+" Newfiles template loading {{{
 augroup new_file
     autocmd!
     autocmd BufNewFile *.f90 0r /home/gclavier/.vim/template.f90
@@ -147,8 +164,10 @@ augroup new_file
     autocmd BufNewFile *.sh  0r /home/gclavier/.vim/template.sh
     autocmd BufNewFile *.ms  0r /home/gclavier/.vim/template.ms
 augroup END
+" }}}
 
 " Useful command for my pythonic python coding
+" Python config group {{{
 augroup filetype_python
     autocmd!
     autocmd FileType python  nnoremap <buffer> <leader>c ^i#<Space><esc>
@@ -164,9 +183,13 @@ augroup filetype_python
     autocmd FileType python  onoremap <buffer> c i{
     autocmd FileType python  onoremap <buffer> inc :<c-u>normal! f{vi{<cr>
     autocmd FileType python  onoremap <buffer> ilc :<c-u>normal! F}vi{<cr>
+    autocmd FileType python  set foldmethod=indent
+    autocmd FileType python  set nofoldenable
 augroup END
+" }}}
 
 " Useful commands for my LaTeXiLaTeX
+" TeX config group {{{
 augroup filetype_tex
     autocmd!
     autocmd FileType tex nnoremap <buffer> <leader>c ^i%<Space><esc>
@@ -182,53 +205,55 @@ augroup filetype_tex
     autocmd FileType tex inoremap \int_ \int_{}^{}<Esc>3hi
     autocmd FileType tex inoremap \frac \frac{}{}<Esc>2hi
 augroup END
+" }}}
 
 " Same goes for the fortranny fortran
+" Fortran config group {{{
 augroup filetype_fortran
     autocmd!
     autocmd FileType fortran nnoremap <buffer> <leader>c ^i!<Space><esc>
 augroup END
+" }}}
 
+" Markdown config group {{{
 augroup filetype_md
     autocmd!
     autocmd Filetype markdown onoremap <buffer> ih :<c-u>execute "normal! ?^\[=,-\]\\+$\r:nohlsearch\rkvg_"<cr>
 augroup END
-
-" Just a simple trick to comment my wonderful .vimrc
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim     nnoremap <buffer> <leader>c ^i"<Space><esc>
-augroup END
+" }}}
 
 " vimplug related plugins
+" Plugin section {{{
 call plug#begin('~/.vim/plugged')
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'dense-analysis/ale'
 
 call plug#end()
+" }}}
 
-" ALE related commands
+" ALE related commands {{{
 " Warning message format
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-" Global fixers
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \        'python': ['black']
-            \      }
+    " Global fixers
+    let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'],
+                \        'python': ['black']
+                \      }
+" }}}
 
-" Personal functions
-function Topots(maxtime,dumptime,dt)
-    let nstep = a:maxtime/a:dt
-    let ndump = a:dumptime/a:dt
-    let timestep = 0
-    while l:timestep <= l:nstep
-        execute ":normal! A ". l:timestep."\n"
-        let temp = l:timestep+1
-        execute ":normal! A ". l:temp."\n"
-        let timestep += l:ndump
-    endwhile
-endfunction
-
+" Personal functions {{{
+    function Topots(maxtime,dumptime,dt)
+        let nstep = a:maxtime/a:dt
+        let ndump = a:dumptime/a:dt
+        let timestep = 0
+        while l:timestep <= l:nstep
+            execute ":normal! A ". l:timestep."\n"
+            let temp = l:timestep+1
+            execute ":normal! A ". l:temp."\n"
+            let timestep += l:ndump
+        endwhile
+    endfunction
+" }}}
