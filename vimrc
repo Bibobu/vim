@@ -162,11 +162,11 @@ augroup END
 " Newfiles template loading {{{
 augroup new_file
     autocmd!
-    autocmd BufNewFile *.f90 0r /home/gclavier/.vim/template.f90
-    autocmd BufNewFile *.py  0r /home/gclavier/.vim/template.py
-    autocmd BufNewFile *.tex 0r /home/gclavier/.vim/template.tex
-    autocmd BufNewFile *.sh  0r /home/gclavier/.vim/template.sh
-    autocmd BufNewFile *.ms  0r /home/gclavier/.vim/template.ms
+    autocmd BufNewFile *.f90 0r /home/$USER/.vim/template.f90
+    autocmd BufNewFile *.py  0r /home/$USER/.vim/template.py
+    autocmd BufNewFile *.tex 0r /home/$USER/.vim/template.tex
+    autocmd BufNewFile *.sh  0r /home/$USER/.vim/template.sh
+    autocmd BufNewFile *.ms  0r /home/$USER/.vim/template.ms
 augroup END
 " }}}
 
