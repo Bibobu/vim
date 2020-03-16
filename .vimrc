@@ -137,7 +137,11 @@
     nnoremap / /\v
     " THE LONG AWAITED STOP THIS GODDAMM HILIGHTSEARCH COMMAND
     nnoremap <leader>/ :nohlsearch<cr>
+    nnoremap <leader>t :NERDTreeToggle<CR>
 " }}}
+
+" Open nerdtree
+autocmd vimenter * NERDTree
 
 " This sign and below group allows folding on markers for vim files.
 " This might become handy in order to navigate the vim
@@ -171,6 +175,7 @@ augroup END
 augroup filetype_python
     autocmd!
     autocmd FileType python  nnoremap <buffer> <leader>c ^i#<Space><esc>
+    autocmd FileType python  nnoremap <buffer> <leader>C :<C-B>silent <C-E>s/^\V# //e<cr>:nohlsearch<cr>
     autocmd FileType python :iabbrev <buffer> iff if:<left>
     autocmd FileType python :iabbrev <buffer> eif elif:<left>
     autocmd FileType python :iabbrev <buffer> eff else:<cr>
@@ -185,6 +190,7 @@ augroup filetype_python
     autocmd FileType python  onoremap <buffer> ilc :<c-u>normal! F}vi{<cr>
     autocmd FileType python  set foldmethod=indent
     autocmd FileType python  set nofoldenable
+    autocmd FileType python  nnoremap <buffer> <F9>  :w<cr> :exec '!python' shellescape(@%, 1)<cr>
 augroup END
 " }}}
 
@@ -192,6 +198,7 @@ augroup END
 " TeX config group {{{
 augroup filetype_tex
     autocmd!
+    autocmd BufWritePost *.tex execute "!pdflatex %" | redraw!
     autocmd FileType tex nnoremap <buffer> <leader>c ^i%<Space><esc>
     autocmd FileType tex inoremap ;b \begin{}<Enter><Enter>\end{}<Up><Up><Right>
     autocmd FileType tex inoremap ;beq \begin{equation}<Enter><Enter>\end{equation}<Up><Up><Right>
@@ -228,6 +235,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'dense-analysis/ale'
+Plug 'preservim/nerdtree'
 
 call plug#end()
 " }}}
