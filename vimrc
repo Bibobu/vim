@@ -13,6 +13,8 @@
     set showmatch
     set incsearch
     set hlsearch
+    " Changes default split behaviour
+    set splitbelow splitright
     " Makes all character visible. A bit annoying but useful sometimes
     " set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
     " set list
