@@ -141,7 +141,7 @@
 " }}}
 
 " Open nerdtree
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 
 " This sign and below group allows folding on markers for vim files.
 " This might become handy in order to navigate the vim
