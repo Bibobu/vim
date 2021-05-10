@@ -25,6 +25,8 @@
     set expandtab
     " Display relative line number
     set number relativenumber
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=darkgrey
     " Starts line with new comments below comment line
     " Only in insert mode
     set formatoptions+=cr
@@ -198,6 +200,7 @@ augroup END
 " TeX config group {{{
 augroup filetype_tex
     autocmd!
+    " autocmd BufWritePost *.tex execute "!xelatex %" | redraw!
     autocmd BufWritePost *.tex execute "!pdflatex %" | redraw!
     autocmd FileType tex nnoremap <buffer> <leader>c ^i%<Space><esc>
     autocmd FileType tex inoremap ;b \begin{}<Enter><Enter>\end{}<Up><Up><Right>
