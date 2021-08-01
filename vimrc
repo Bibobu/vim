@@ -16,8 +16,8 @@
     " Changes default split behaviour
     set splitbelow splitright
     " Makes all character visible. A bit annoying but useful sometimes
-    " set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
-    " set list
+    set listchars=nbsp:¬,eol:$,tab:>-,extends:»,precedes:«,trail:-
+    set list
     " Indent
     filetype plugin indent on
     set ruler
@@ -28,7 +28,6 @@
     " Display relative line number
     set number relativenumber
     set colorcolumn=80
-    highlight ColorColumn ctermbg=darkgrey
     " Starts line with new comments below comment line
     " Only in insert mode
     set formatoptions+=cr
@@ -252,6 +251,7 @@ call plug#end()
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
     " Global fixers
+    let g:ale_linters = { 'cpp':  ['cppcheck', 'cpplint', 'gcc'] }
     let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'],
                 \        'python': ['black']
                 \      }
