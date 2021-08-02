@@ -27,6 +27,8 @@
     set expandtab
     " Display relative line number
     set number relativenumber
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=darkgrey
     " Starts line with new comments below comment line
     " Only in insert mode
     set formatoptions+=cr
