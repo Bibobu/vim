@@ -16,8 +16,8 @@
     " Changes default split behaviour
     set splitbelow splitright
     " Makes all character visible. A bit annoying but useful sometimes
-    " set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
-    " set list
+    set listchars=nbsp:¬,eol:$,tab:>-,extends:»,precedes:«,trail:-
+    set list
     " Indent
     filetype plugin indent on
     set ruler
@@ -202,6 +202,7 @@ augroup END
 " TeX config group {{{
 augroup filetype_tex
     autocmd!
+    " autocmd BufWritePost *.tex execute "!xelatex %" | redraw!
     autocmd BufWritePost *.tex execute "!pdflatex %" | redraw!
     autocmd FileType tex nnoremap <buffer> <leader>c ^i%<Space><esc>
     autocmd FileType tex inoremap ;b \begin{}<Enter><Enter>\end{}<Up><Up><Right>
@@ -251,6 +252,7 @@ call plug#end()
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
     " Global fixers
+    let g:ale_linters = { 'cpp':  ['cppcheck', 'cpplint', 'gcc'] }
     let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'],
                 \        'python': ['black']
                 \      }
