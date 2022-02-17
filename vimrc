@@ -2,7 +2,8 @@
 " General options {{{
     set encoding=utf-8
     " My colorset
-    colorscheme turlututu
+    " colorscheme turlututu
+    colorscheme elflord
     syntax on
     " Options I like
     " Wrap lines
@@ -203,7 +204,8 @@ augroup END
 augroup filetype_tex
     autocmd!
     " autocmd BufWritePost *.tex execute "!xelatex %" | redraw!
-    autocmd BufWritePost *.tex execute "!pdflatex %" | redraw!
+    " autocmd BufWritePost *.tex execute "!pdflatex %" | redraw!
+    autocmd FileType tex map <F9> :!pdflatex % <cr> | redraw!
     autocmd FileType tex nnoremap <buffer> <leader>c ^i%<Space><esc>
     autocmd FileType tex inoremap ;b \begin{}<Enter><Enter>\end{}<Up><Up><Right>
     autocmd FileType tex inoremap ;beq \begin{equation}<Enter><Enter>\end{equation}<Up><Up><Right>
